@@ -1,6 +1,6 @@
-﻿Input: S = "ababcbacadefegdehijhklij"
+﻿题目描述：分隔字符串使同种字符出现在一起.
+
+Example 1:
+
+Input: S = "ababcbacadefegdehijhklij"
 Output: [9,7,8]
-Explanation:
-The partition is "ababcbaca", "defegde", "hijhklij".
-This is a partition so that each letter appears in at most one part.
-A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits S into less parts.
