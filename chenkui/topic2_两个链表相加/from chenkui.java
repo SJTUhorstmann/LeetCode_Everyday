@@ -16,6 +16,7 @@ class Solution {
         add=add/10;
         list=list.next;
       }
+
       return list1.next;
       
     }
