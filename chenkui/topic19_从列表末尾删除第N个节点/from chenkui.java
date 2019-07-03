@@ -1,21 +1,21 @@
 ﻿class Solution {
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-    
-    ListNode start = new ListNode(0);
-    ListNode slow = start, fast = start;
-    slow.next = head;
-    
-    //Move fast in front so that the gap between slow and fast becomes n
-    for(int i=1; i<=n+1; i++)   {
-        fast = fast.next;
+     public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode prev = null;
+        ListNode slowPointer = head;
+        ListNode fastPointer = head;
+         
+        while(fastPointer != null) {
+            if (n != 0) { 
+                n--;
+            } else {
+                prev = slowPointer;
+                slowPointer = slowPointer.next;                
+            }
+            fastPointer = fastPointer.next;
+        }
+        
+        if (prev == null) return slowPointer.next;
+        prev.next = slowPointer.next;
+        return head;
     }
-    //Move fast to the end, maintaining the gap
-    while(fast != null) {
-        slow = slow.next;
-        fast = fast.next;
-    }
-    //Skip the desired node
-    slow.next = slow.next.next;
-    return start.next;
-}
 }
