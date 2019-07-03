@@ -1,27 +1,21 @@
 ﻿class Solution {
-    int maxLen=0;
-    int left=0;
-    
     public String longestPalindrome(String s) {
-      int len=s.length();
-      if(len<2) return s;
-      for(int i=0;i<len-1;i++){
-        Palindrome(s,i,i);
-        Palindrome(s,i,i+1);
-      }
-      
-      return s.substring(left,left+maxLen);
+       if ("".equals(s)) {
+       return s;
     }
-    public void Palindrome(String s,int begin,int end){
-       while(begin>=0 && end <s.length() && s.charAt(begin)==s.charAt(end)){
-        begin--;
-        end++;
-      }
-      if(maxLen<end-begin-1){
-        left=begin+1;
-        maxLen=end-begin-1;
-      }
-      
+    int len = s.length();
+    boolean[][] arr = new boolean[len][len];
+    int left = 0, right = 0;
+    for (int i = len - 2; i >= 0; i--) {
+       arr[i][i] = true;
+       for (int j = i + 1; j < len; j++) {
+           arr[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || arr[i + 1][j - 1]);
+           if (arr[i][j] && right - left < j - i) {
+              left = i;
+              right = j;
+           }
+       }
     }
-   
+    return s.substring(left, right + 1);
+}
 }
