@@ -1,37 +1,42 @@
 ﻿class Solution {
-    int n=0,m=0;
-    boolean isVisited[][];
-    char[][] board; String word;
-
-    public boolean exist(char[][] _board, String _word) {
-        board=_board;
-        word=_word;
-        n=board.length;
-        m=board[0].length;
-        isVisited=new boolean[n][m];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(word.charAt(0)==board[i][j]){
-                    if(dfs(i,j,1)) return true;
+    public boolean exist(char[][] board, String word) {
+        if (word == null || word.isEmpty())
+            return true;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
+                if (board[row][col] == word.charAt(0)) {
+                    if (existUtil(board, row, col, word.toCharArray(),0, new boolean[board.length][board[0].length]))
+                        return true;
                 }
             }
         }
         return false;
     }
-    public boolean dfs(int x,int y,int u){
-        if(u==word.length()) return true;
-        isVisited[x][y]=true;
-        int[] dx={-1,0,1,0};
-        int[] dy={0,1,0,-1};
-        for(int i=0;i<4;i++){
-            int a=x+dx[i];
-            int b=y+dy[i];
-            if(a>=0&&a<n&&b>=0&&b<m&&!isVisited[a][b]&&board[a][b]==word.charAt(u)){
-                if(dfs(a,b,u+1)) return true;
-            }
+
+    private boolean existUtil(char[][] board, int row, int col, char[] word, int index,  boolean[][] isVisited) {
+                            
+        if (!isSafe(board, row, col, isVisited) || index >= word.length) {
+            return false;
         }
-        isVisited[x][y]=false;
-        return false;
-        
+        if (board[row][col] != word[index]) {
+            return false;
+        }
+        isVisited[row][col] = true;
+        if (index == word.length - 1) {
+            return true;
+        }
+
+        boolean result = existUtil(board, row, col - 1, word, index + 1, isVisited) ||
+                existUtil(board, row, col + 1, word, index + 1, isVisited) ||
+                existUtil(board, row - 1, col, word, index + 1, isVisited) ||
+                existUtil(board, row + 1, col, word, index + 1, isVisited);
+
+        isVisited[row][col] = false;        
+        return result;
+    }
+    private boolean isSafe(char[][] board, int row, int col, boolean[][] isVisited) {
+        if (row < 0 || row >= board.length || col < 0 || col >= board[0].length || isVisited[row][col])
+            return false;
+        return true;
     }
 }
