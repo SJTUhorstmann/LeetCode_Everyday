@@ -3,9 +3,10 @@
         if(num==0) 
             return "0";
         
-        boolean judge=true;
+        boolean judge=false;
+
         if(num<0){
-            judge=false;
+            judge=true;
             num=-num;
         }
         StringBuilder sb=new StringBuilder();
@@ -15,7 +16,7 @@
             num=num/7;
         }
         sb.append("");
-        if(!judge){
+        if(judge){
             sb.append("-");
         }
         return sb.reverse().toString();
