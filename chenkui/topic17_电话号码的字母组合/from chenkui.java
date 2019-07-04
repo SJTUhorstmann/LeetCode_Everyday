@@ -1,19 +1,25 @@
 ﻿class Solution {
-    public List<String> letterCombinations(String digits) {
-      LinkedList<String> list=new LinkedList<String>();
-      if(digits.length()==0) return list;
-      list.add("");
-      String[] st=new String[]{"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-      for(int i=0;i<digits.length();i++){
-        int tem=digits.charAt(i)-'0';
-        int len=st[tem].length();
-        while(list.peek().length()==i){
-          String st1= list.remove();
-          for(int j=0;j<len;j++){
-            list.add(st1+st[tem].charAt(j));
-          }
+    
+    private static String[] phoneLetters = new String[]{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public List<String> letterComboHelper(String prefix, String digits)
+    {
+        List<String> results = new ArrayList<>();
+        int digit = Character.getNumericValue(digits.charAt(0));
+        String letters = phoneLetters[digit];
+        for(int i = 0; i < letters.length(); i++)
+        {
+            if(digits.length() == 1)
+                results.add(prefix + letters.charAt(i));
+            else
+                results.addAll(letterComboHelper(prefix + letters.charAt(i), digits.substring(1)));
         }
-      }
-      return list;
+        return results;
     }
+  
+    public List<String> letterCombinations(String digits) {
+        if(digits.length()==0)
+            return new ArrayList<>();
+        return letterComboHelper("",digits);
+    }
+    
 }
