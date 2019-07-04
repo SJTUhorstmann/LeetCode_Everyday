@@ -7,10 +7,12 @@
             if(arr[i]){
                 continue;
             }
+            else{
             count++;
             for(long j=(long)i*i;j<n;j=j+i){
                 arr[(int)j]=true;
             }
+          }
         }
         return count;
     }
