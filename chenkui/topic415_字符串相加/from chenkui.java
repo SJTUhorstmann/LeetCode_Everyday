@@ -3,8 +3,9 @@
         
         StringBuilder sb = new StringBuilder();
         int tem = 0;
-        int len1 = num1.length() - 1;
+
         int len2 = num2.length() - 1;
+        int len1 = num1.length() - 1; 
         
         while (tem >0  || len1 >= 0 || len2 >= 0) {
             
