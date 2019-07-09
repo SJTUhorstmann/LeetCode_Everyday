@@ -6,9 +6,9 @@
  *     ListNode(int x) { val = x; }
  * }
  */
-
 class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
+    // 方法1
+    /*public ListNode deleteDuplicates(ListNode head) {
         if(head==null || head.next==null){
             return head;
         }
@@ -17,17 +17,33 @@ class Solution {
         while(head!=null){
             
             int tem=head.val;
-            ListNode head2=head.next;
-            while (head2!=null && head2.val==tem){
-                head2=head2.next;
+            ListNode head1=head.next;
+            while (head1!=null && head1.val==tem){
+                head1=head1.next;
             }
             
-            head.next=head2;
+            head.next=head1;
             head=head.next;
             
         }
-
         return result;
+            
+    }*/
+    
+    // 方法2
+    
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        if(head.val==head.next.val){
+            return deleteDuplicates(head.next);
+        }
+        else{
+            head.next=deleteDuplicates(head.next);
+        }
+        
+        return head;
             
     }
 }
