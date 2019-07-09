@@ -6,6 +6,7 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if(head==null || head.next==null){
@@ -16,15 +17,16 @@ class Solution {
         while(head!=null){
             
             int tem=head.val;
-            ListNode head1=head.next;
-            while (head1!=null && head1.val==tem){
-                head1=head1.next;
+            ListNode head2=head.next;
+            while (head2!=null && head2.val==tem){
+                head2=head2.next;
             }
             
-            head.next=head1;
+            head.next=head2;
             head=head.next;
             
         }
+
         return result;
             
     }
