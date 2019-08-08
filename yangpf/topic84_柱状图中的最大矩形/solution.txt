@@ -1,0 +1,44 @@
+//暴力，击败10%
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        int max=-1;
+        int maxArea=0;
+        for(int i=0;i<n;i++){
+            int min=heights[i];
+            for(int j=i;j<n;j++){
+                min=Math.min(min,heights[j]);
+                maxArea=Math.max(maxArea,(j-i+1)*min);
+                // if(heights[j]>max){
+                //     max=heights[j];
+                // }
+            }
+        }
+        return maxArea;
+    }
+}
+
+//优化一下，击败36%
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n=heights.length;
+        int max=-1;
+        int min=0;
+        int maxArea=0;
+        for(int i=0;i<n;i++){
+            if(heights[i]<=min){
+                continue;
+            }else{
+                min=heights[i];
+            }
+            for(int j=i;j<n;j++){
+                min=Math.min(min,heights[j]);
+                maxArea=Math.max(maxArea,(j-i+1)*min);
+                // if(heights[j]>max){
+                //     max=heights[j];
+                // }
+            }
+        }
+        return maxArea;
+    }
+}
