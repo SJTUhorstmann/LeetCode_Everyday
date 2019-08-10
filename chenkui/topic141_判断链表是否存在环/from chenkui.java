@@ -13,7 +13,7 @@
 
 public class Solution {
     public boolean hasCycle(ListNode head) {
-     //双指针
+     //方法1：双指针
     /* if(head==null || head.next==null) return false;
       ListNode fast=head.next.next;
       ListNode slow=head.next;
@@ -29,7 +29,8 @@ public class Solution {
     } 
 
     */
-     // 用HashMap
+
+     //方法2： 用HashMap
       HashMap<ListNode,Integer> map=new HashMap<>();
       while(head!=null){
         if(map.containsKey(head)){
