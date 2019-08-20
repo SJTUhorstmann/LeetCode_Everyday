@@ -1,4 +1,3 @@
-
 //栈
 class Solution {
     public int evalRPN(String[] tokens) {
@@ -20,5 +19,28 @@ class Solution {
             }
         }
         return Integer.valueOf(stack.pop());
+    }
+}
+
+//改良写法
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack=new Stack<>();
+        for(String s:tokens){
+            if(s.equals("*")){
+                stack.push(stack.pop()*stack.pop());
+            }else if(s.equals("/")){
+                int num=stack.pop();
+                stack.push(stack.pop()/num);
+            }else if(s.equals("-")){
+                int num=stack.pop();
+                stack.push(stack.pop()-num);
+            }else if(s.equals("+")){
+                stack.push(stack.pop()+stack.pop());
+            }else{
+                stack.push(Integer.valueOf(s));
+            }
+        }
+        return stack.pop();
     }
 }
