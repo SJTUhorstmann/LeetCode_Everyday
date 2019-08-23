@@ -1,0 +1,38 @@
+public class Test {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int N=sc.nextInt();
+        int K=sc.nextInt();
+        int[] arr=new int[N];
+        for(int i=0;i<N;i++){
+            arr[i]=sc.nextInt();
+        }
+        //已经能被3整除的个数
+        int count=0;
+        //不能被3整除的数，%3 等于1的个数
+        int oneCount=0;
+        //不能被3整除的数，%3 等于2的个数
+        int twoCount=0;
+        for(int i=0;i<N;i++){
+            if(arr[i]%3==0) count++;
+            else if(arr[i]%3==1)    oneCount++;
+            else {
+                twoCount++;
+            }
+        }
+        int min=Math.min(oneCount,twoCount);
+        int max=Math.max(oneCount,twoCount);
+        if(K<=min){
+            System.out.println(K+count);
+        }else{
+            count+=min;
+            //最后只剩下的1或者2的个数，接下来需要每操作两次才能组合成3的倍数
+            max-=min;
+            //剩余操作次数
+            K-=min;
+            //剩余的数最多能组成3的倍数的个数
+            max=max/3;
+            System.out.println(count+Math.min(K/2,max));
+        }
+    }
+}
