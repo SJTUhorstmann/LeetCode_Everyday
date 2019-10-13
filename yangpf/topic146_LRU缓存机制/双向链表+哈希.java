@@ -32,8 +32,12 @@ class DoubleList{
         node.next.prev=node.prev;
         size--;
     }
-    public Node getLast(){
+    public Node removeLast(){
+        if(tail.prev==head){
+            return null;
+        }
         Node node=tail.prev;
+        delete(node);
         return node;
     }
     public int getSize(){
@@ -70,10 +74,8 @@ class LRUCache {
             map.put(key,newNode);
         }else{
             if(cache.getSize()==capacity){
-                Node last=cache.getLast();
-                int k=last.key;
-                cache.delete(last);
-                map.remove(k);
+                Node last=cache.removeLast();
+                map.remove(last.key);
             }
             Node node=new Node(key,value);
             map.put(key,node);
